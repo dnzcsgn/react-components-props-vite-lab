@@ -1,11 +1,27 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
-import App from "../components/App";
+import { render, screen } from "@testing-library/react";
+import App from "../App";
 
-test("renders the correct child components", () => {
-  const { container } = render(<App />);
-  expect(container.querySelector(".App")).toBeInTheDocument();
-  expect(container.querySelector(".App header")).toBeInTheDocument();
-  expect(container.querySelector(".App aside")).toBeInTheDocument();
-  expect(container.querySelector(".App main")).toBeInTheDocument();
+test("renders the blog title", () => {
+  render(<App />);
+  expect(screen.getByText("My React Blog")).toBeInTheDocument();
+});
+
+test("renders the about section", () => {
+  render(<App />);
+  expect(
+    screen.getByText("This is a blog about learning React step-by-step."),
+  ).toBeInTheDocument();
+});
+
+test("renders all article previews", () => {
+  render(<App />);
+  expect(
+    screen.getByText(
+      "React lets you build user interfaces in a modular way...",
+    ),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText("A guide to designing clean and reusable components..."),
+  ).toBeInTheDocument();
 });
